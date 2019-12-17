@@ -1,1 +1,2 @@
-export default (name: string): string => `Hello ${name} !`
+export * from './maths/index'
+export * from './general/index'

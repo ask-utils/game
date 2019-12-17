@@ -47,7 +47,8 @@
       }
     },
     "testMatch": [
-      "**/__tests__/*.+(ts|js)"
+      "**/__tests__/*.test.+(ts|js)",
+      "**/__tests__/**/*.test.+(ts|js)"
     ]
   },
   "lint-staged": {
@@ -62,6 +63,9 @@
   "devDependencies": {
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
+    "@types/aws-lambda": "^8.10.39",
+    "@types/bunyan": "^1.8.6",
+    "@types/bunyan-format": "^0.2.3",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.3",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
@@ -84,5 +88,11 @@
     "tslib": "^1.10.0",
     "typedoc": "^0.15.0",
     "typescript": "^3.6.2"
+  },
+  "dependencies": {
+    "@ask-utils/core": "^3.3.0",
+    "ask-sdk-core": "^2.7.0",
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1"
   }
 }
