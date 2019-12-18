@@ -1,37 +1,21 @@
-# TypeScript Package template
+# @ask-utils/game
 
 GitHub Template repository to create a npm package by using TypeScript.
 
 ## Badges
 
-[![NPM](https://nodei.co/npm/MY_REPO_NAME.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/MY_REPO_NAME/)  
-[![npm version](https://badge.fury.io/js/MY_REPO_NAME.svg)](https://badge.fury.io/js/MY_REPO_NAME)
+[![NPM](https://nodei.co/npm/@ask-utils/game.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@ask-utils/game/)  
+[![npm version](https://badge.fury.io/js/@ask-utils/game.svg)](https://badge.fury.io/js/@ask-utils/game)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c17851759423ce151b9e/maintainability)](https://codeclimate.com/github/hideokamoto/MY_REPO_NAME/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/c17851759423ce151b9e/test_coverage)](https://codeclimate.com/github/hideokamoto/MY_REPO_NAME/test_coverage)
-[![Build Status](https://travis-ci.org/hideokamoto/MY_REPO_NAME.svg?branch=master)](https://travis-ci.org/hideokamoto/MY_REPO_NAME)
-
-
-## OGP
-
-```bash
-// both
-$ yarn run create:ogp
-
-// dark
-$ yarn run create:ogp:dark
-
-// light
-$ yarn run create:ogp:light
-```
-![image](./ogp_dark.png)  
-![image](./ogp_light.png)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c17851759423ce151b9e/maintainability)](https://codeclimate.com/github/hideokamoto/@ask-utils/game/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/c17851759423ce151b9e/test_coverage)](https://codeclimate.com/github/hideokamoto/@ask-utils/game/test_coverage)
+[![Build Status](https://travis-ci.org/hideokamoto/@ask-utils/game.svg?branch=master)](https://travis-ci.org/hideokamoto/@ask-utils/game)
 
 ## Prepare
 
 ```
-$ git clone YOUR_REPO_URI
-$ cd YOUR_REPO_URI
+$ git clone git@github.com:ask-utils/game.git
+$ cd game
 
 // Put your GitHub Personal Access Token
 $ mv .envrc.example .envrc
@@ -68,8 +52,8 @@ $ git commit -m "<type>[optional scope]: <description>
 
 ```bash
 // clone
-$ git clone git@github.com:hideokamoto/MY_REPO_NAME.git
-$ cd MY_REPO_NAME
+$ git clone git@github.com:ask-utils/game.git
+$ cd game
 
 // setup
 $ yarn
