@@ -2,7 +2,8 @@ import {
   getCalculateResult,
   getRandomNumber,
   getSpeechOperator,
-  getRandomOperator
+  getRandomOperator,
+  getSpeechQuizText
 } from '../../../libs/maths/createQuizService/helpers'
 import {
   CalcOperator
@@ -61,6 +62,15 @@ describe('libs/maths/createQuizService/helpers', () => {
       const targets: CalcOperator[] = ['plus', 'minus']
       const results = getRandomOperator(targets[0], targets[1])
       expect(targets.includes(results)).toEqual(true)
+    })
+  })
+  describe('getSpeechQuizText', () => {
+    it('t', () => {
+      const ssml = getSpeechQuizText([1, 2], 'plus', {
+        status: 'enable',
+        lang: 'de-DE'
+      })
+      expect(ssml).toContain('<lang xml:lang="de-DE">1plus2</lang>')
     })
   })
 })

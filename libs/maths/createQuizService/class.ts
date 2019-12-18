@@ -6,7 +6,8 @@ import {
   defaultQuizConfig
 } from '../model'
 import logger from '../../logger'
-import { getCalculateResult, getSpeechOperator, getRandomNumber } from './helpers'
+import { getCalculateResult, getSpeechOperator, getRandomNumber, getSpeechQuizText } from './helpers'
+import { PollyConfig } from '../../general'
 
 export class CreateMathQuizService {
   /**
@@ -54,6 +55,7 @@ export class CreateMathQuizService {
    */
   protected allowDecimal = false
 
+  protected pollyConfig: PollyConfig
   /**
    * 生成された数字のリスト
    */
@@ -80,6 +82,7 @@ export class CreateMathQuizService {
       // eslint-disable-next-line @typescript-eslint/camelcase
       widget_type: this.constructor.name
     })
+    this.pollyConfig = this.config.pollyConfig
   }
 
   /**
@@ -181,8 +184,9 @@ export class CreateMathQuizService {
   /**
    * 喋る用の演算子
    */
-  private getSpeechOperator (): string {
-    const { operator, lang } = this
+  private getSpeechOperator (overwriteLang?: string): string {
+    const { operator } = this
+    const lang = overwriteLang || this.lang
     return getSpeechOperator(operator, lang)
   }
 
@@ -191,6 +195,15 @@ export class CreateMathQuizService {
    */
   private getCalculateResult (): number {
     return getCalculateResult(this.operator, this.numbers)
+  }
+
+  private getSpeechedQuiz () {
+    const { numbers, pollyConfig } = this
+    if (pollyConfig.status !== 'enable' || pollyConfig.lang === '') {
+      const speechOperator = this.getSpeechOperator()
+      return numbers.join(`${speechOperator}`)
+    }
+    return getSpeechQuizText(numbers, this.operator, pollyConfig)
   }
 
   /**
@@ -203,12 +216,11 @@ export class CreateMathQuizService {
     }
     this.numbers = numbers.sort((a, b) => (a < b ? 1 : -1))
     if (this.numbers.length < 2) throw new Error('quiz number must be grater than two')
-    const speechOperator = this.getSpeechOperator()
     const answer = this.getCalculateResult()
     if (this.isDebug) {
       this.log.info({
         numbers: this.numbers,
-        quiz: this.numbers.join(`${speechOperator}`),
+        quiz: this.getSpeechedQuiz(),
         answer,
         allowUnderZero: this.allowUnderZero,
         allowDecimal: this.allowDecimal,
@@ -223,13 +235,13 @@ export class CreateMathQuizService {
       if (!this.allowDecimal) return this.createQuiz()
       return {
         numbers: this.numbers,
-        quiz: this.numbers.join(`${speechOperator}`),
+        quiz: this.getSpeechedQuiz(),
         answer: Math.ceil(answer * 100) / 100
       }
     }
     return {
       numbers: this.numbers,
-      quiz: this.numbers.join(`${speechOperator}`),
+      quiz: this.getSpeechedQuiz(),
       answer
     }
   }

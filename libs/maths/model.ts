@@ -2,7 +2,8 @@ import {
   QuizConfig,
   Quiz,
   QuizLevel,
-  QuizLevelConfig
+  QuizLevelConfig,
+  PollyConfig
 } from '../general/model'
 export type CalcOperator = 'plus' | 'minus' | 'times' | 'dividedBy'
 export interface MathQuiz extends Quiz<number> {
@@ -40,10 +41,16 @@ export interface MathQuizConfig extends QuizConfig {
   allowUnderZero?: boolean;
 }
 
+export const defaultPollyConfig: PollyConfig = {
+  status: 'disable',
+  lang: ''
+}
+
 export const defaultQuizConfig: Required<MathQuizConfig> = {
   isDebug: false,
   allowUnderZero: false,
   lang: 'ja-JP',
+  pollyConfig: defaultPollyConfig,
   level: 'normal',
   operator: 'plus',
   max: 50,

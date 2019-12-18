@@ -1,4 +1,9 @@
+import {
+  getRandomSpeaker,
+  getRandomLanguage
+} from '@ask-utils/core'
 import { CalcOperator } from '../model'
+import { PollyConfig } from '../../general'
 
 /**
  * Get random number by specific range
@@ -63,6 +68,60 @@ export const getSpeechOperator = (operator: CalcOperator, lang: string): string 
         return operator
     }
   }
+  if (/es/.test(lang)) {
+    switch (operator) {
+      case 'dividedBy':
+        return 'entre'
+      case 'times':
+        return 'por'
+      case 'plus':
+        return 'más'
+      case 'minus':
+        return 'menos'
+      default:
+        return operator
+    }
+  }
+  if (/de/.test(lang)) {
+    switch (operator) {
+      case 'dividedBy':
+        return 'geteilt durch'
+      case 'times':
+        return 'mal'
+      case 'plus':
+      case 'minus':
+      default:
+        return operator
+    }
+  }
+  if (/fr/.test(lang)) {
+    switch (operator) {
+      case 'dividedBy':
+        return 'divisé par'
+      case 'times':
+        return 'fois'
+      case 'minus':
+        return 'moins'
+      case 'plus':
+      default:
+        return operator
+    }
+  }
+  if (/it/.test(lang)) {
+    switch (operator) {
+      case 'dividedBy':
+        return 'diviso'
+      case 'times':
+        return 'per'
+      case 'plus':
+        return 'piu'
+      case 'minus':
+        return 'meno'
+      default:
+        return operator
+    }
+  }
+  // if (lang === 'random')
   return operator
 }
 
@@ -103,4 +162,12 @@ export const getCalculateResult = (operator: CalcOperator, numbers: number[]): n
     }
   })
   return result
+}
+
+export const getSpeechQuizText = (numbers: number[], operator: CalcOperator, pollyConfig: PollyConfig): string => {
+  if (pollyConfig.lang === '') throw new Error('lang should not be empty')
+  const lang = pollyConfig.lang === 'random' ? getRandomLanguage() : pollyConfig.lang
+  const speechOperator = getSpeechOperator(operator, lang)
+  const speaker = getRandomSpeaker(lang)
+  return `<voice name="${speaker}"><lang xml:lang="${lang}">${numbers.join(`${speechOperator}`)}</lang></voice>`
 }

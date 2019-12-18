@@ -1,3 +1,12 @@
+import {
+  PollyLanguage
+} from '@ask-utils/core'
+export type ConfigStatus = 'disable' | 'enable'
+export type PollyConfig = {
+  status: ConfigStatus;
+  lang: PollyLanguage | '' | 'random';
+}
+
 // 有料版限定レベル
 export type PremiumPlayQuizLevel = 'very_easy' | 'super_hard' | 'extra_hard' | 'extream'
 
@@ -18,6 +27,8 @@ export interface QuizConfig {
   level?: QuizLevel;
   // 言語
   lang?: Lang;
+  // Polly SSML
+  pollyConfig?: PollyConfig;
   // 正解時
   addPoint?: number;
   // 不正解時のマイナス
