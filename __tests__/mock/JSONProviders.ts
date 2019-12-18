@@ -57,6 +57,13 @@ export const createRequestEnvelope = (request?: Partial<RequestEnvelope>): Reque
   return Object.assign({}, obj, request)
 }
 
+export const createAttributesManager = (requestEnvelope: RequestEnvelope, persistenceAdapter?: PersistenceAdapter) => {
+  return AttributesManagerFactory.init({
+    requestEnvelope: requestEnvelope,
+    persistenceAdapter: persistenceAdapter || new MockPersistenceAdapter()
+  })
+}
+
 class HandlerInputFactory {
   protected requestEnvelope: RequestEnvelope
   protected lambdaContext: Context
