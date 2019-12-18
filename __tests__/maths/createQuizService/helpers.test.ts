@@ -1,8 +1,12 @@
 import {
   getCalculateResult,
   getRandomNumber,
-  getSpeechOperator
+  getSpeechOperator,
+  getRandomOperator
 } from '../../../libs/maths/createQuizService/helpers'
+import {
+  CalcOperator
+} from '../../../libs/maths/model'
 
 describe('libs/maths/createQuizService/helpers', () => {
   describe('getRandomNumber', () => {
@@ -47,6 +51,16 @@ describe('libs/maths/createQuizService/helpers', () => {
     })
     it('should say "divided by" in English', () => {
       expect(getSpeechOperator('dividedBy', 'en-GB')).toEqual('divided by')
+    })
+  })
+  describe('getRandomOperator', () => {
+    it('should return plus', () => {
+      expect(getRandomOperator('plus')).toEqual('plus')
+    })
+    it('should return plus or minus', () => {
+      const targets: CalcOperator[] = ['plus', 'minus']
+      const results = getRandomOperator(targets[0], targets[1])
+      expect(targets.includes(results)).toEqual(true)
     })
   })
 })
