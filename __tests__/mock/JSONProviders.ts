@@ -25,7 +25,7 @@ export const createRequestEnvelope = (request?: Partial<RequestEnvelope>): Reque
           supportedInterfaces: {}
         },
         user: {
-          userId: ''
+          userId: 'userId'
         }
       }
     },
