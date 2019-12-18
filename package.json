@@ -1,6 +1,6 @@
 {
   "name": "@ask-utils/game",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Simply game helpers for ask-utils",
   "main": "dist/index.js",
   "engines": {
