@@ -3,6 +3,40 @@ import {
 } from '../../../libs/maths/createQuizService/index'
 
 describe('libs/maths/createQuizService/class', () => {
+  describe('polly mode', () => {
+    it('should mark en-CA when polly config enabled', () => {
+      const service = new CreateMathQuizService({
+        lang: 'ja-JP',
+        pollyConfig: {
+          status: 'enable',
+          lang: 'en-CA'
+        }
+      }).enableDebugMode()
+      const result = service.createQuiz()
+      expect(result).toEqual({
+        answer: expect.any(Number),
+        numbers: expect.any(Array),
+        quiz: expect.any(String)
+      })
+      expect(result.quiz).toContain('en-CA')
+    })
+    it('should NOT mark en-CA when polly config disabled', () => {
+      const service = new CreateMathQuizService({
+        lang: 'ja-JP',
+        pollyConfig: {
+          status: 'disable',
+          lang: 'en-CA'
+        }
+      }).enableDebugMode()
+      const result = service.createQuiz()
+      expect(result).toEqual({
+        answer: expect.any(Number),
+        numbers: expect.any(Array),
+        quiz: expect.any(String)
+      })
+      expect(result.quiz).not.toContain('en-CA')
+    })
+  })
   describe('CreateMathQuizService', () => {
     let service = new CreateMathQuizService().enableDebugMode()
     beforeEach(() => {
